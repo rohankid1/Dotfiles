@@ -1,15 +1,25 @@
 #! /bin/sh
 
 # Autostart
-/usr/bin/dunst &
-sxhkd &
-picom &
-polybar top &
-feh --bg-fill ~/Desktop/Media/Wallpapers/ms11holidaywpaper.jpg &
-discord &
-imwheel &
-flameshot &
-wmname LG3D &
+# Uncomment below line if you have dunst installed
+# /usr/bin/dunst &
+# Uncomment below line if you have sxhkd installed
+# sxhkd &
+# Uncomment below line if you have picom installed
+# picom &
+# Uncomment below line if you have polybar installed
+# polybar top &
+# Instructions on installing feh can be found here => https://feh.finalrewind.org/.
+# Uncomment below line if you have feh installed
+# feh --bg-fill path/to/your/wallpaper &
+# Optional - discord
+# discord &
+# Optional -imwheel
+# imwheel &
+# Optional
+# flameshot &
+# Optional - I have this so I can run some Java programs properly
+# wmname LG3D &
 
 bspc monitor -d I II III IV V 
 bspc config border_width        0 
