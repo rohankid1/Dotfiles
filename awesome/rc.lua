@@ -97,7 +97,7 @@ local themes = {
     "vertex"           -- 10
 }
 
-local chosen_theme = themes[6]
+local chosen_theme = themes[5]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "alacritty"
@@ -107,16 +107,16 @@ local editor       = os.getenv("EDITOR") or "nvim"
 local browser      = "librewolf"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "1", "2", "3", "4", "5" }
+awful.util.tagnames = { "1", "2", "3", "4", "5", "6" }
 awful.layout.layouts = {
-   -- awful.layout.suit.floating,
-   -- awful.layout.suit.tile,
+    awful.layout.suit.tile,
    -- awful.layout.suit.tile.left,
    -- awful.layout.suit.tile.bottom,
    -- awful.layout.suit.tile.top,
     --awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
+    --awful.layout.suit.spiral,
+    awful.layout.suit.floating,
     --awful.layout.suit.spiral.dwindle,
     --awful.layout.suit.max,
     --awful.layout.suit.max.fullscreen,
@@ -266,8 +266,8 @@ root.buttons(mytable.join(
 
 globalkeys = mytable.join(
     -- Destroy all notifications
-    awful.key({ "Control",           }, "space", function() naughty.destroy_all_notifications() end,
-              {description = "destroy all notifications", group = "hotkeys"}),
+   --  awful.key({ "Control",           }, "space", function() naughty.destroy_all_notifications() end,
+       --       {description = "destroy all notifications", group = "hotkeys"}),
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
     awful.key({ altkey }, "p", function() os.execute("screenshot") end,
@@ -547,14 +547,21 @@ globalkeys = mytable.join(
         {description = "show rofi", group = "launcher"}),
     --]]
     -- Prompt
-    awful.key({ modkey }, "r", function () 
+    awful.key({ modkey }, "r", function ()
     awful.util.spawn("dmenu_run") end,
               {description = "run prompt", group = "launcher"}),
 
-    -- Waterfox
+    -- Librewolf
     awful.key({modkey}, "l", function ()
-    awful.util.spawn("/home/rohan/waterfox/waterfox") end,
+    awful.util.spawn("flatpak run io.gitlab.librewolf-community") end,
 	{description = "browser", group = "application"}),
+
+
+    -- Obsidian MD
+    awful.key({modkey}, "o", function()
+    awful.util.spawn("flatpak run md.obsidian.Obsidian") end,
+	{description = "Markup Editor", group = "application"}),
+	
 
     -- Flameshot
     awful.key({modkey}, "p", function ()
@@ -563,7 +570,7 @@ globalkeys = mytable.join(
 
     -- Brave browser
     awful.key({modkey}, "b", function ()
-    awful.util.spawn("brave-browser") end,   
+    awful.util.spawn("brave-browser") end,
 	{description = "browser", group = "application"}),
 
     -- Tlauncher
@@ -802,10 +809,11 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- Gaps
-beautiful.useless_gap = 5
+beautiful.useless_gap = 12
 
 -- Autostart
 awful.spawn.with_shell("nitrogen --restore")
 awful.spawn.with_shell("discord")
 awful.spawn.with_shell("flameshot")
 awful.spawn.with_shell("/usr/bin/dunst")
+awful.spawn.with_shell("imwheel")
